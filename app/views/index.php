@@ -86,6 +86,17 @@ $param   = parseURL()[2];
                         </div>`;
     $(function() {
         $.ajax({
+            url: `<?= BASEURL ?>/approve/getApi/<?= $param ?>/getDataMaster`,
+            type: 'GET',
+            dataType: 'json',
+            success: function(res) {
+                console.log(res);
+            }
+        })
+
+
+
+        $.ajax({
             url: `<?= BASEURL ?>/approve/getApi/<?= $param ?>/getApi`,
             type: 'GET',
             dataType: 'json',
@@ -219,6 +230,9 @@ $param   = parseURL()[2];
                 }
             })
         })
+    })
+    $(document).on("click", "#btn-view", function() {
+        window.location.href = `<?= BASEURL ?>/approve/ViewPengajuan`;
     })
 </script>
 

@@ -23,7 +23,10 @@ class approve extends Controller
     {
         $this->view('index');
     }
-
+    public function ViewPengajuan()
+    {
+        $this->view('showData');
+    }
 
     public function sendApi($params, $api)
     {
@@ -63,6 +66,9 @@ class approve extends Controller
         // var_dump($params);
         $this->sendApi($params, $api);
     }
+
+
+
     public function Confirm()
     {
         $params   = unserialize(hex2bin(base64_decode(urldecode($_POST['id']))));
@@ -74,6 +80,5 @@ class approve extends Controller
         // $params   = unserialize(hex2bin(base64_decode(urldecode($param))));
 
         // var_dump($params);
-
     }
 }
