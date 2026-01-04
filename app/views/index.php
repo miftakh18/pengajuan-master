@@ -26,7 +26,7 @@ $param   = parseURL()[2];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pengajuan Master</title>
-    <link rel="icon" href="<?= BASEURL ?>/assets/img/logo-mmc-nobg.png" type="image/png">
+    <link rel="icon" href="<?= BASEURL ?>/assets/img/logo-rsmmc-nobg.png" type="image/png">
     <link rel="stylesheet" href="<?= BASEURL ?>/assets/plugin/sweetalert2/package/dist/sweetalert2.min.css">
     <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
