@@ -232,7 +232,7 @@ $param   = parseURL()[2];
         })
     })
     $(document).on("click", "#btn-view", function() {
-        window.location.href = `<?= BASEURL ?>/approve/ViewPengajuan`;
+        window.location.href = `<?= BASEURL ?>/approve/ViewPengajuan/<?= $param ?>`;
     })
 </script>
 
