@@ -84,7 +84,11 @@ $param   = parseURL()[2];
 
 
         <div class="px-5 sm:px-8 py-6">
-
+            <div class="mt-7 flex my-2   justify-end ">
+                <a class=" rounded-xl border px-5 py-2.5 text-sm font-semibold text-light-200 bg-white-200 hover:bg-sky-50" href="<?= BASEURL; ?>/approve/pengajuan/<?= $param ?>">
+                    Kembali
+                </a>
+            </div>
             <section class="mb-7">
 
 
@@ -305,11 +309,27 @@ $param   = parseURL()[2];
                     </div>
                 </div>
             </section>
-            <div class="mt-7 flex flex-col sm:flex-row gap-3 justify-end ">
-                <a class="w-full sm:w-auto rounded-xl border px-5 py-2.5 text-sm font-semibold text-slate-600 hover:bg-slate-50" href="<?= BASEURL; ?>/approve/pengajuan/<?= $param ?>">
-                    Kembali
-                </a>
-            </div>
+            <section>
+                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
+                    <div>
+                        <div class="text-[11px] text-slate-500">HNA</div>
+                        <div class="mt-1 rounded-lg bg-slate-50 border px-3 py-2 text-sm" id="hna">-</div>
+                    </div>
+                    <div>
+                        <div class="text-[11px] text-slate-500">PPN</div>
+                        <div class="mt-1 rounded-lg bg-slate-50 border px-3 py-2 text-sm" id="ppn">-</div>
+                    </div>
+                    <div>
+                        <div class="text-[11px] text-slate-500">DISKON</div>
+                        <div class="mt-1 rounded-lg bg-slate-50 border px-3 py-2 text-sm" id="diskon">-</div>
+                    </div>
+                    <div>
+                        <div class="text-[11px] text-slate-500">PBF</div>
+                        <div class="mt-1 rounded-lg bg-slate-50 border px-3 py-2 text-sm" id="pbf">-</div>
+                    </div>
+                </div>
+            </section>
+
         </div>
     </div>
     <script src="<?= BASEURL ?>/assets/plugin/sweetalert2/package/dist/sweetalert2.all.min.js"></script>
@@ -418,6 +438,10 @@ $param   = parseURL()[2];
                     $.each(res.header.jenis, function(i, val) {
                         $(`#${i}`).addClass(`${Jenistrue(val)}`);
                     })
+                    $("#hna").html(`${res.header.hna}`);
+                    $("#ppn").html(`${res.header.ppn}`);
+                    $("#diskon").html(`${res.header.diskon}`);
+                    $("#pbf").html(`${res.header.pbf}`);
                 }
 
             })

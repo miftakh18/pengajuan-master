@@ -155,7 +155,7 @@ $param   = parseURL()[2];
         let id = $(this).data('id');
         Swal.fire({
 
-            title: 'DIPERLUKAN !',
+
             icon: 'warning',
             showCloseButton: true,
             allowOutsideClick: false,
@@ -164,6 +164,9 @@ $param   = parseURL()[2];
                 autocapitalize: "off",
                 placeholder: 'KODE BARANG',
                 required: true
+            },
+            inputValidator: (value) => {
+                if (!value) return `Kode barang wajib diisi`;
             },
             confirmButtonText: 'SUBMIT',
             customClass: {
@@ -179,27 +182,27 @@ $param   = parseURL()[2];
             buttonsStyling: false,
 
         }).then((ok) => {
+            if (ok.isConfirmed) {
+                $.ajax({
+                    url: `<?= BASEURL ?>/approve/Confirm`,
+                    type: 'POST',
+                    data: {
+                        id: id,
+                        kode_barang: ok.value
 
-            $.ajax({
-                url: `<?= BASEURL ?>/approve/Confirm`,
-                type: 'POST',
-                data: {
-                    id: id,
-                    kode_barang: ok.value
+                    },
+                    dataType: 'json',
+                    beforeSend: function() {
+                        iconPengajuan = `<div class="swal2-loader" data-button-to-replace="swal2-confirm swal2-styled" style="display: flex;"></div>`;
+                        textPengajuan = ` <p class="font-nunito text-sky-800 font-extrabold text-2xl animate-ping">PROSES</p>`;
+                        $("#icon-pengajuan").html(`<div class="flex justify-center align-middle max-h-100 min-h-20 pt-20 mb-0">${iconPengajuan}</div>`);
+                        $("#text-pengajuan").html(textPengajuan);
+                        $("#div-btn").html(`<div class="block w-full bg-white  rounded-full text-white text-sm px-10 py-2 shadow-sm/50 active:shadow-sm/20 hover:font-light  font-bold font-nunito tracking-[0.2rem] flex justify-center align-center ">${iconPengajuan}</div>`);
+                    },
+                    success: function(res) {
 
-                },
-                dataType: 'json',
-                beforeSend: function() {
-                    iconPengajuan = `<div class="swal2-loader" data-button-to-replace="swal2-confirm swal2-styled" style="display: flex;"></div>`;
-                    textPengajuan = ` <p class="font-nunito text-sky-800 font-extrabold text-2xl animate-ping">PROSES</p>`;
-                    $("#icon-pengajuan").html(`<div class="flex justify-center align-middle max-h-100 min-h-20 pt-20 mb-0">${iconPengajuan}</div>`);
-                    $("#text-pengajuan").html(textPengajuan);
-                    $("#div-btn").html(`<div class="block w-full bg-white  rounded-full text-white text-sm px-10 py-2 shadow-sm/50 active:shadow-sm/20 hover:font-light  font-bold font-nunito tracking-[0.2rem] flex justify-center align-center ">${iconPengajuan}</div>`);
-                },
-                success: function(res) {
-
-                    btn = ` <span class="text-green-500 text-sm pt-5 py-5 italic text-bold font-nunito  px-auto">Approved : ${res.data.approve_by}</span>`;
-                    iconPengajuan = `
+                        btn = ` <span class="text-green-500 text-sm pt-5 py-5 italic text-bold font-nunito  px-auto">Approved : ${res.data.approve_by}</span>`;
+                        iconPengajuan = `
                                 <div style="display: flex;" class="swal2-icon swal2-success swal2-icon-show">
                                     <div class="swal2-success-circular-line-left" style="background-color: rgb(255, 255, 255);"></div>
                                     <span class="swal2-success-line-tip"></span> <span class="swal2-success-line-long"></span>
@@ -212,23 +215,24 @@ $param   = parseURL()[2];
 
 
 
-                    if (res.type === 'success') {
-                        textPengajuan = `
+                        if (res.type === 'success') {
+                            textPengajuan = `
                                 <p class="font-nunito text-sky-800 font-extrabold text-2xl">TERKONFIRMASI</p>
                                 <p class="font-nunito text-sky-800 font-bold text-sm mt-2 border border-t-sky-300 border-b-sky-300 border-x-0 bg-sky-100  py-2 pl-3  bg-grey"  id="nama_barang"></p>
                                
                                 `;
-                        $("#div-btn").removeClass('flex justify-center');
-                        $("#div-btn").addClass('text-center');
-                        $("#div-btn").html(`${btn}${btn2}`);
-                        $("#icon-pengajuan").html(iconPengajuan);
-                        $("#text-pengajuan").html(textPengajuan);
-                        $("#nama_barang").html(res.data.nama_barang);
+                            $("#div-btn").removeClass('flex justify-center');
+                            $("#div-btn").addClass('text-center');
+                            $("#div-btn").html(`${btn}${btn2}`);
+                            $("#icon-pengajuan").html(iconPengajuan);
+                            $("#text-pengajuan").html(textPengajuan);
+                            $("#nama_barang").html(res.data.nama_barang);
+
+                        }
 
                     }
-
-                }
-            })
+                })
+            }
         })
     })
     $(document).on("click", "#btn-view", function() {

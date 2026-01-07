@@ -12,10 +12,10 @@ define('BASASSETS', 'http://localhost/pengajuan-master/public/assets/');
 
 
 // database
-define('DB_HOST', '192.168.0.33');
-define('DB_USER', 'pendaftaran');
-define('DB_PASS', 'pendaftaran');
-define('DB_NAME', 'tenant_mmc');
+// define('DB_HOST', '192.168.0.33');
+// define('DB_USER', 'pendaftaran');
+// define('DB_PASS', 'pendaftaran');
+// define('DB_NAME', 'tenant_mmc');
 
 
 // database
